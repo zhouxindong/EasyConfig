@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EasyConfig</RootNamespace>
     <AssemblyName>EasyConfig</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -39,6 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ConfigurationPropertyAttribute.cs" />
+    <Compile Include="Attributes\ConfigurationSectionAttribute.cs" />
+    <Compile Include="Exceptions\BadConfigurationFileException.cs" />
+    <Compile Include="Exceptions\ConfigurationFileNotFoundException.cs" />
+    <Compile Include="Exceptions\DuplicatePropertyNameException.cs" />
+    <Compile Include="Exceptions\NoConfigurationClassException.cs" />
+    <Compile Include="Exceptions\NoConfigurationPropertyException.cs" />
+    <Compile Include="Exceptions\TargetPropertyNotFoundException.cs" />
+    <Compile Include="Internal\ConfigurationSection.cs" />
+    <Compile Include="Internal\IConfigurationFileReader.cs" />
+    <Compile Include="Internal\SectionMapper.cs" />
+    <Compile Include="Internal\TextConfigurationFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

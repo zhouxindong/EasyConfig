@@ -1,7 +1,9 @@
-﻿namespace EasyConfig.Internal
+﻿using System.Collections.Generic;
+
+namespace EasyConfig.Internal
 {
-    interface IConfigurationFileReader
+    public interface IConfigurationFileReader
     {
-        ConfigurationSection[] Read(string file_name);
+        List<ConfigurationSection> Read(string file_name);
     }
 }

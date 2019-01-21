@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpKnife">
+      <HintPath>.\SharpKnife.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,13 +47,19 @@
   <ItemGroup>
     <Compile Include="Attributes\ConfigurationPropertyAttribute.cs" />
     <Compile Include="Attributes\ConfigurationSectionAttribute.cs" />
+    <Compile Include="ConfigurationManager.cs" />
     <Compile Include="Exceptions\BadConfigurationFileException.cs" />
     <Compile Include="Exceptions\ConfigurationFileNotFoundException.cs" />
+    <Compile Include="Exceptions\ConfigurationSetNotExistsException.cs" />
     <Compile Include="Exceptions\DuplicatePropertyNameException.cs" />
     <Compile Include="Exceptions\NoConfigurationClassException.cs" />
     <Compile Include="Exceptions\NoConfigurationPropertyException.cs" />
+    <Compile Include="Exceptions\PropertyNotFoundException.cs" />
+    <Compile Include="Exceptions\PropertyTypeMismatchException.cs" />
+    <Compile Include="Exceptions\SectionNotFoundException.cs" />
     <Compile Include="Exceptions\TargetPropertyNotFoundException.cs" />
     <Compile Include="Internal\ConfigurationSection.cs" />
+    <Compile Include="Internal\ConfigWithDefaultValue.cs" />
     <Compile Include="Internal\IConfigurationFileReader.cs" />
     <Compile Include="Internal\SectionMapper.cs" />
     <Compile Include="Internal\TextConfigurationFileReader.cs" />

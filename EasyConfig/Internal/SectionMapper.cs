@@ -7,24 +7,34 @@ using EasyConfig.Exceptions;
 
 namespace EasyConfig.Internal
 {
-    internal class SectionMapper
+    /// <summary>
+    /// Generate a configuration class from a ConfigurationSection
+    /// </summary>
+    public class SectionMapper
     {
-        private void PropertiesCheck(Type target_type, ConfigurationSection section, bool strict)
+        /// <summary>
+        /// ensure all properties of a section defined in the configuration file
+        /// have the property definition in the related class and apply properly Attribute 
+        /// </summary>
+        /// <param name="target_type"></param>
+        /// <param name="section"></param>
+        private void PropertiesCheck(Type target_type, ConfigurationSection section/*, bool strict*/)
         {
-            if (strict && !Attribute.IsDefined(target_type, typeof(ConfigurationSectionAttribute), true))
+            if (/*strict && */!Attribute.IsDefined(target_type, typeof(ConfigurationSectionAttribute), true))
                 throw new NoConfigurationClassException(target_type);
 
             Dictionary<string, PropertyInfo> target_properties
                 = target_type.GetProperties().ToDictionary(GetConfigurationPropertyName);
 
+            // 针对配置文件的某个section中定义的所有属性
             foreach (var section_property in section.Properties)
             {
+                if (!target_properties.ContainsKey(section_property.Key))
+                    throw new TargetPropertyNotFoundException(target_type, section_property.Key);
+
                 PropertyInfo target_property = target_properties[section_property.Key];
 
-                if (!target_properties.ContainsKey(section_property.Key))
-                    throw new TargetPropertyNotFoundException(target_type, target_property);
-
-                if (strict && !Attribute.IsDefined(target_property, typeof(ConfigurationPropertyAttribute), true))
+                if (/*strict && */!Attribute.IsDefined(target_property, typeof(ConfigurationPropertyAttribute), true))
                     throw new NoConfigurationPropertyException(target_type, target_property);
             }
         }
@@ -40,13 +50,13 @@ namespace EasyConfig.Internal
             return string.IsNullOrEmpty(configuration_field.FieldName) ? property.Name : configuration_field.FieldName;
         }
 
-        public T MapSection<T>(ConfigurationSection section, bool strict)
+        public T MapSection<T>(ConfigurationSection section/*, bool strict*/)
             where T : class, new()
         {
             Type target_type = typeof(T);
             T target = new T();
 
-            PropertiesCheck(target_type, section, strict);
+            PropertiesCheck(target_type, section/*, strict*/);
 
             Dictionary<string, PropertyInfo> target_properties = target_type.GetProperties().ToDictionary(GetConfigurationPropertyName);
 

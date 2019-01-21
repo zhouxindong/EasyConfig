@@ -8,7 +8,7 @@ namespace EasyConfig.Internal
     /// <summary>
     /// [XXXX]
     /// </summary>
-    internal class ConfigurationSection
+    public class ConfigurationSection
     {
         /// <summary>
         /// Gets section name
